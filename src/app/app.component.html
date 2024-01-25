@@ -1,81 +1,39 @@
-<div class="container bootstrap snippets bootdey">
-  <div class="col-sm-4">
-    <!-- Begin user profile -->
-    <div class="box-info text-center user-profile-2">
-      <div class="header-cover">
-        <img src="https://www.bootdey.com/image/350x280/FFB6C1/000000" alt="User cover">
-      </div>
-      <div class="user-profile-inner">
-        <h4 class="white">Jonny doe</h4>
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-circle profile-avatar" alt="User avatar">
-        <h5>Administrator</h5>
-          
-        <!-- User button -->
-        <div class="user-button">
-          <div class="row">
-            <div class="col-md-6">
-              <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-            </div>
-            <div class="col-md-6">
-              <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-user"></i> Add as friend</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ms-2" href="#">Employee Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   
-  <div class="col-sm-4">
-      <!-- Begin user profile -->
-    <div class="box-info text-center user-profile-2">
-      <div class="header-cover">
-        <img src="https://www.bootdey.com/image/350x280/87CEFA/000000" alt="User cover">
-      </div>
-      <div class="user-profile-inner">
-        <h4 class="white">Jonny doe</h4>
-        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle profile-avatar" alt="User avatar">
-        <h5>Administrator</h5>
-          
-        <!-- User button -->
-        <div class="user-button">
-          <div class="row">
-            <div class="col-md-6">
-              <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-            </div>
-            <div class="col-md-6">
-              <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-user"></i> Add as friend</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div> <!-- Use ms-auto to move the search input to the right -->
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"> <span class="sr-only">Add Employee</span></a>
+        </li>
+      </ul>
     </div>
-  </div>
-  
-  <div class="col-sm-4">
-      <!-- Begin user profile -->
-    <div class="box-info text-center user-profile-2">
-      <div class="header-cover">
-        <img src="https://www.bootdey.com/image/350x280/FF7F50/000000" alt="User cover">
+    <form class = "ms-auto">
+      <div class="form-inline my-2 my-lg-0 me-2">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search employees..." aria-label="Search">
       </div>
-      <div class="user-profile-inner">
-        <h4 class="white">Jonny doe</h4>
-        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-circle profile-avatar" alt="User avatar">
-        <h5>Administrator</h5>
-          
-        <!-- User button -->
-        <div class="user-button">
-          <div class="row">
-            <div class="col-md-6">
-              <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-            </div>
-            <div class="col-md-6">
-              <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-user"></i> Add as friend</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
+</nav>
 
-  
-</div>       
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let employee of employees">
+      <div class=" card">
+        <img class="card-img-top" src="{{employee.imageUrl}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{employee.name}}</h5>
+          <p class="card-text">Job Title: {{employee.jobTitle}}</p>
+          <p class="card-text">Phone: {{employee.phone}}</p>
+          <p class="card-text">Email: {{employee.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
