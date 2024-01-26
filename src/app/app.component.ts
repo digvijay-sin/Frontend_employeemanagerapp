@@ -32,4 +32,25 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  // creating button programmatically
+  public onOpenModal(employee: Employee | null, mode : String) : void{
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    // dynamically opening the modal using their id's
+    if(mode === 'add'){
+      button.setAttribute('data-target', '#addEmployeeModal');
+    }    
+    if(mode === 'edit'){
+      button.setAttribute('data-target', '#updateEmployeeModal');
+    }
+    if(mode === 'delete'){
+      button.setAttribute('data-target', '#deleteEmployeeModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
 }

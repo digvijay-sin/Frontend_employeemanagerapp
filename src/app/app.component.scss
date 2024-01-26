@@ -1,7 +1,36 @@
+
 .container{
-    margin-top: 20px;
+    margin-top: 30px;
     
     .card{
         margin-bottom: 10px;
+
+        .card-img-top{
+            max-width: 100px;
+            max-height: 100px;
+        }
     }
 }
+
+.rounded-image {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px; /* Adjust the width as needed */
+    height: 80px; /* Adjust the height as needed */
+  }
+.popping-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .popping-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .name-title {
+    color: #333; /* Adjust the color as needed */
+  }
+  

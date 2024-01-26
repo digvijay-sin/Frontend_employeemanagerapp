@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand ms-2" href="#">Employee Manager</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand ms-2" href="/">Employee Manager</a>
+  <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#exampleModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   
@@ -8,7 +9,7 @@
     <div> <!-- Use ms-auto to move the search input to the right -->
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#"> <span class="sr-only">Add Employee</span></a>
+          <a class="nav-link" (click)= "onOpenModal(null, 'add')" href="/"> <span class="sr-only">Add Employee</span></a>
         </li>
       </ul>
     </div>
@@ -19,21 +20,88 @@
     </form>
   </div>
 </nav>
-
-<div class="container">
+<!--  Card -->
+<div class="container main-container" >
   <div class="row">
     <div class="col-md-4" *ngFor="let employee of employees">
-      <div class=" card">
-        <img class="card-img-top" src="{{employee.imageUrl}}" alt="Card image cap">
+      <div class="card popping-card">
+        <div style="display: inline-flex; column-gap: 50px; padding: 25px;">
+          <img class="card-img-top rounded-image" src="{{employee?.imageUrl}}" alt="Card image cap">
+          <div class = "name-title">
+            <h4 class="card-title">{{employee?.name}}</h4>
+            <p class="card-text">{{employee?.jobTitle}}</p>
+          </div>
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{employee.name}}</h5>
-          <p class="card-text">Job Title: {{employee.jobTitle}}</p>
-          <p class="card-text">Phone: {{employee.phone}}</p>
-          <p class="card-text">Email: {{employee.email}}</p>
+          <p class="card-text">Phone: {{employee?.phone}}</p>
+          <p class="card-text">Email: y{{employee?.email}}</p>          
+          <button (click) = "onOpenModal(employee,'edit')" style="margin-right: 5px;" type="button" class="btn btn-dark">edit</button>
+          <button (click) = "onOpenModal(employee,'delete')" type="button" class="btn btn-danger">delete</button>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+
+<!-- Add Employee Modal -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Employee Modal -->
+<div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Employee Modal -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
