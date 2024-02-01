@@ -17,7 +17,7 @@
     </div>
     <form class="ms-auto">
       <div class="form-inline my-2 my-lg-0 me-2">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search employees..." aria-label="Search" />
+        <input class="form-control mr-sm-2" (ngModelChange) = "searchEmployee(key.value)" name = "key" #key = "ngModel" ngModel type="search" placeholder="Search employees..." aria-label="Search" />
       </div>
     </form>
   </div>
@@ -29,7 +29,7 @@
     <div class="col-md-4" *ngFor="let employee of employees">
       <div class="card popping-card">
         <div style="display: inline-flex; column-gap: 50px; padding: 25px">
-          <img class="card-img-top rounded-image" src="{{ employee?.imageUrl }}" alt="Card image cap" />
+          <img class="card-img-top rounded-image" src="{{ employee?.imageUrl }}" alt=" Image cap Url" />
           <div class="name-title">
             <h5 class="card-title">{{ employee?.name }}</h5>
             <p class="card-text">{{ employee?.jobTitle }}</p>
@@ -61,32 +61,34 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #addEmployeeForm="ngForm" (ngSubmit)="onAddEmployee(addEmployeeForm)">
+          <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
             <div class="mb-3">
               <label for="firstName" class="form-label"> Name</label>
               <input type="name" ngModel name="name" class="form-control" id="Name" placeholder="Name" required />
-            </div>            
+            </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email Address</label>
-              <input type="text" ngModel name="email" class="form-control" id="email" placeholder="Email" required/>
+              <input type="text" ngModel name="email" class="form-control" id="email" placeholder="Email" required />
             </div>
             <div class="mb-3">
               <label for="jobTitle" class="form-label">Job Title</label>
-              <input type="text" ngModel name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title" required/>
+              <input type="text" ngModel name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title"
+                required />
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Phone" required/>
+              <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Phone" required />
             </div>
             <div class="mb-3">
               <label for="imageUrl" class="form-label">Image Url</label>
-              <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image Url" required/>
+              <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image Url"
+                required />
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <button type="button" class="btn btn-secondary" id="addEmployee" data-bs-dismiss="modal">
                 Close
               </button>
-              <button [disabled] ="addEmployeeForm.invalid" type="submit" class="btn btn-primary">
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">
                 Save changes
               </button>
             </div>
@@ -102,40 +104,47 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit Employee {{editEmployee?.name}}</h5>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form #editForm="ngForm" (ngSubmit)="onUpdateEmployee(editForm.value)">
             <div class="mb-3">
               <label for="firstName" class="form-label"> Name</label>
-              <input type="name" ngModel name="name" class="form-control" id="Name" placeholder="Name" required />
-            </div>            
+              <input type="name" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="Name"
+                placeholder="Name" required />
+            </div>
+            <input type="hidden" ngModel = "{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="id" />
+            <input type="hidden" ngModel = {{editEmployee?.employeeCode}} name="employeeCode" class="form-control" id="employeeCode" placeholder="employeeCode" />
             <div class="mb-3">
               <label for="email" class="form-label">Email Address</label>
-              <input type="text" class="form-control" id="email" />
+              <input type="text" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email"
+                required />
             </div>
             <div class="mb-3">
               <label for="jobTitle" class="form-label">Job Title</label>
-              <input type="text" class="form-control" id="jobTitle" />
+              <input type="text" ngModel="{{editEmployee?.jobTitle}}" name="jobTitle" class="form-control" id="jobTitle"
+                required />
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="jobTitle" />
+              <input type="text" ngModel="{{editEmployee?.phone}}" name="phone" class="form-control" id="jobTitle"
+                required />
             </div>
             <div class="mb-3">
               <label for="imageUrl" class="form-label">Image Url</label>
-              <input type="text" class="form-control" id="imageUrl" />
+              <input type="text" ngModel="{{editEmployee?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl"
+                required />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="editEmployee" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" [disabled]="editForm.invalid" class="btn btn-primary">Save changes</button>
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -152,14 +161,21 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">Are you sure you want to delete employee?</div>
+        <div class="modal-body">Are you sure you want to delete employee {{deleteEmployee?.name}}</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <button type="button" id="deleteEmployee" class="btn btn-secondary" data-bs-dismiss="modal">
             No
           </button>
-          <button type="button" class="btn btn-danger">Yes</button>
+          <button (click)="onDeleteEmployee(deleteEmployee?.id)"  type="button" class="btn btn-danger">Yes</button>
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="employees?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO EMPLOYEES!</h4>
+      <p>No Employees were found.</p>
+    </div>
+    </div>
 </div>
